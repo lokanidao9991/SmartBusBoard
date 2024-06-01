@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abfahrtshaltestellen Auswahl</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Wählen Sie eine Abfahrtshaltestelle</h1>
+        <form method="post" action="{{ url_for('update') }}">
+            <div class="form-group">
+                <label for="stop">Haltestelle:</label>
+                <input id="stop" name="stop_title" type="text" class="form-control" value="{{ settings['stop_title'] }}">
+                <input type="hidden" id="stop_point_ref" name="stop_point_ref" value="{{ settings['stop_point_ref'] }}">
+            </div>
+            <div class="form-group">
+                <label for="number_of_results">Anzahl Ergebnisse:</label>
+                <input id="number_of_results" name="number_of_results" type="text" class="form-control" value="{{ settings['number_of_results'] }}">
+            </div>
+            <div class="form-group">
+                <label for="desired_destinations">Gewünschte Ziele:</label>
+                <input id="desired_destinations" name="desired_destinations" type="text" class="form-control" value="{{ settings['desired_destinations'] }}">
+            </div>
+            <div class="form-group">
+                <label for="threshold">Threshold:</label>
+                <input id="threshold" name="threshold" type="text" class="form-control" value="{{ settings['threshold'] }}">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Aktualisieren</button>
+        </form>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // Fetch stops for autocomplete
+            $.get('/stops', function(data) {
+                $("#stop").autocomplete({
+                    source: data,
+                    select: function(event, ui) {
+                        $("#stop").val(ui.item.label); // Set the value of the input to the label
+                        $("#stop_point_ref").val(ui.item.value); // Set the value of the hidden input to the value
+                        return false; // Prevent the default behavior of setting the value
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
