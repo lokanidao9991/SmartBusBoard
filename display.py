@@ -128,7 +128,7 @@ def get_departures(config):
 
                 # Include departure only if it meets criteria
                 if minutes_until_departure >= THRESHOLD and (
-                        "all" in desired_destinations or any(dest in destination for dest in desired_destinations)):
+                        "all" in desired_destinations or "All" in desired_destinations or any(dest in destination for dest in desired_destinations)):
                     departures.append((line, destination, minutes_until_departure))
 
     else:

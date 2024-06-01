@@ -31,20 +31,20 @@
         <form method="post" action="{{ url_for('update') }}">
             <div class="form-group">
                 <label for="stop">Haltestelle:</label>
-                <input id="stop" name="stop_title" type="text" class="form-control" value="{{ settings['stop_title'] }}">
+                <input id="stop" name="stop_title" type="text" class="form-control" value="{{ settings['stop_title'] }}" placeholder="Geben Sie den Namen der Haltestelle ein.">
                 <input type="hidden" id="stop_point_ref" name="stop_point_ref" value="{{ settings['stop_point_ref'] }}">
             </div>
             <div class="form-group">
                 <label for="number_of_results">Anzahl Ergebnisse:</label>
-                <input id="number_of_results" name="number_of_results" type="text" class="form-control" value="{{ settings['number_of_results'] }}">
+                <input id="number_of_results" name="number_of_results" type="number" class="form-control" value="{{ settings['number_of_results'] }}" placeholder="Geben Sie die Anzahl der anzuzeigenden Ergebnisse ein.">
             </div>
             <div class="form-group">
                 <label for="desired_destinations">Gewünschte Ziele:</label>
-                <input id="desired_destinations" name="desired_destinations" type="text" class="form-control" value="{{ settings['desired_destinations'] }}">
+                <input id="desired_destinations" name="desired_destinations" type="text" class="form-control" value="{{ settings['desired_destinations'] }}" placeholder="Geben Sie die gewünschten Ziele ein, getrennt durch Kommas (ohne Leerzeichen): Zürich,Bern,Basel. Für sämtliche Ziele, geben sie All ein.>
             </div>
             <div class="form-group">
-                <label for="threshold">Threshold:</label>
-                <input id="threshold" name="threshold" type="text" class="form-control" value="{{ settings['threshold'] }}">
+                <label for="threshold">Threshold (Minuten):</label>
+                <input id="threshold" name="threshold" type="number" class="form-control" value="{{ settings['threshold'] }}" placeholder="Geben Sie die Mindestanzahl der Minuten bis zur Abfahrt ein.">
             </div>
             <button type="submit" class="btn btn-primary btn-block">Aktualisieren</button>
         </form>
